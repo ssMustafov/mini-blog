@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<link rel="stylesheet" href="/blog/css/lib/bootstrap.min.css" />
+	<link rel="stylesheet" href="/blog/css/lib/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="/blog/css/main.css" />
+	
+	<script type="text/javascript" src="/blog/js/lib/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/blog/js/lib/bootstrap.min.js"></script>
+
+	<h:outputScript name="javax.faces/jsf.js" />
+
+	<ui:insert name="head" />
+</h:head>
+<body>
+	<ui:include src="/templates/header.xhtml" />
+
+	<div class="container">
+		<ui:insert name="content" />
+	</div>
+</body>
+</html>
