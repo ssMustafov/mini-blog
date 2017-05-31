@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="head">
+		<title>Profile of #{authenticated.fullName}</title>
+		<f:metadata>
+			<f:viewAction action="#{profile.loadUser()}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:panelGroup layout="block" styleClass="alert alert-success" role="alert" rendered="#{profile.success}">
+			Profile successfuly updated
+		</h:panelGroup>	
+	
+		<h:form id="profile-form">
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<h:inputText id="username" value="#{profile.user.username}" styleClass="form-control" disabled="true" />
+			</div>
+			
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<h:inputSecret id="password" value="#{profile.user.password}" styleClass="form-control" />
+				<h:message id="password-message" for="password" styleClass="text-danger" />
+			</div>
+			
+			<div class="form-group">
+				<label for="full-name">Full name</label>
+				<h:inputText id="full-name" value="#{profile.user.fullName}" styleClass="form-control" />
+				<h:message id="full-name-message" for="full-name" styleClass="text-danger" />
+			</div>
+
+			<h:commandButton styleClass="btn btn-primary" value="Save" action="#{profile.save()}" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>

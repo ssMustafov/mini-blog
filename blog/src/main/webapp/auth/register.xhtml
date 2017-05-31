@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" template="/templates/template.xhtml">
+
+	<ui:define name="head">
+		<title>Registration</title>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:panelGroup layout="block" styleClass="alert alert-success" role="alert" rendered="#{registerController.registered}">
+			Registered successfully. You can login now.
+		</h:panelGroup>
+
+		<h:form id="register-form" rendered="#{!registerController.registered}">
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<h:inputText id="username" value="#{registerController.user.username}" styleClass="form-control" required="true"
+					validator="#{registerController.validateUsername}">
+					<f:validateLength minimum="4" maximum="15" />
+					<f:ajax render="username username-message register-btn" />
+				</h:inputText>
+				<h:message id="username-message" for="username" styleClass="text-danger" />
+			</div>
+
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<h:inputSecret id="password" value="#{registerController.user.password}" styleClass="form-control" required="true"
+					redisplay="true">
+					<f:validateLength minimum="6" />
+					<f:ajax render="password password-message register-btn" />
+				</h:inputSecret>
+				<h:message id="password-message" for="password" styleClass="text-danger" />
+			</div>
+
+			<div class="form-group">
+				<label for="password-confirm">Password confirmation:</label>
+				<h:inputSecret id="password-confirm" value="#{registerController.passwordConfirmation}" styleClass="form-control"
+					required="true" redisplay="true">
+					<f:ajax render="password-confirm password-confirm-message register-btn" />
+				</h:inputSecret>
+				<h:message id="password-confirm-message" for="password-confirm" styleClass="text-danger" />
+			</div>
+
+			<div class="form-group">
+				<label for="full-name">Full name</label>
+				<h:inputText id="full-name" value="#{registerController.user.fullName}" styleClass="form-control" required="true">
+					<f:validateLength minimum="2" maximum="20" />
+					<f:ajax render="full-name full-name-message register-btn" />
+				</h:inputText>
+				<h:message id="full-name-message" for="full-name" styleClass="text-danger" />
+			</div>
+
+			<h:commandButton id="register-btn" styleClass="btn btn-primary" value="Register" action="#{registerController.register()}"
+				disabled="#{not facesContext.postback or facesContext.validationFailed}" />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

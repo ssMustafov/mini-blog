@@ -1,0 +1,16 @@
+insert into User (username, password, fullName) values ('adrian', '123456', 'Adrian Mitev');
+insert into User (username, password, fullName) values ('donald', '123456', 'Donald Trump');
+insert into User (username, password, fullName) values ('ivan', '123456', 'Ivan Ivanov');
+insert into User (username, password, fullName) values ('valyo', '123456', 'Valenvin Minkov');
+insert into User (username, password, fullName) values ('radoslav', '123456', 'Radoslav Radev');
+insert into User (username, password, fullName) values ('deyan', '123456', 'Deyan Alexandrov');
+insert into User (username, password, fullName) values ('sinan', '123456', 'Sinan Mustafov');
+insert into User (username, password, fullName) values ('petya', '123456', 'Petya Dunitsova');
+insert into User (username, password, fullName) values ('georgi', '123456', 'Georgi Petrov');
+insert into User (username, password, fullName) values ('yordan', '123456', 'Yordan Iliev');
+insert into User (username, password, fullName) values ('stanimir', '123456', 'Stanimir Donchev');
+insert into User (username, password, fullName) values ('sezen', '123456', 'Sezen Dermendjiev');
+insert into User (username, password, fullName) values ('test', '123456', 'Test Test');
+insert into User (username, password, fullName) values ('testUser', '123456', 'Test User');
+insert into User (username, password, fullName) values ('developer', '123456', 'Dev');
+insert into User (username, password, fullName) values ('miroslav', '123456', 'Miroslav Chervenski');
