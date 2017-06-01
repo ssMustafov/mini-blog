@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="head">
+		<f:metadata>
+			<f:viewParam name="id" value="#{postController.id}" />
+			<f:viewParam name="mode" value="#{postController.mode}" />
+			<f:viewAction action="#{postController.loadPost()}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		
+		<h:form id="edit-post-form" rendered="#{not empty postController.mode and postController.mode == 'edit'}">
+			<div class="form-group">
+				<label for="title">Title:</label>
+				<h:inputText id="title" value="#{postController.post.title}" styleClass="form-control" required="true"
+					autocomplete="off" validator="#{postController.validateTitle}" />
+				<h:message for="title" styleClass="text-danger" />
+			</div>
+
+			<div class="form-group">
+				<label for="content">Content:</label>
+				<h:inputTextarea id="content" value="#{postController.post.content}" styleClass="form-control" required="true"
+					autocomplete="off" rows="10" />
+				<h:message for="content" styleClass="text-danger" />
+			</div>
+
+			<h:commandButton id="submit-btn" styleClass="btn btn-primary" value="Save" action="#{postController.save()}" />
+		</h:form>
+		
+		<h:panelGroup rendered="#{empty postController.mode or postController.mode != 'edit'}">
+			<div class="page-header">
+			  <h1>#{postController.post.title}</h1>
+			</div>
+			<div class="row">
+				<div class="col-sm-10 post-meta">
+					Posted on
+					<h:outputText value="#{postController.post.createdOn}" >
+					    <f:convertDateTime pattern="MMM dd HH:mm:ss yyyy" />
+					</h:outputText>
+					by <strong>#{postController.post.createdBy.fullName}</strong>
+					·
+					Last modified on:
+					<h:outputText value="#{postController.post.lastModifiedOn}" >
+					    <f:convertDateTime pattern="MMM dd HH:mm:ss yyyy" />
+					</h:outputText>
+				</div>
+				<h:panelGroup layout="block" styleClass="col-sm-2" rendered="#{authenticated.id == postController.post.createdBy.id}">
+					<div class="pull-right">
+						<h:link value="Edit" styleClass="btn btn-sm btn-primary link-btn" outcome="post" >
+						    <f:param name="id" value="#{postController.post.id}" />
+						    <f:param name="mode" value="edit" />
+						</h:link>
+						<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">
+						  Delete
+						</button>
+					</div>
+				</h:panelGroup>
+			</div>
+			<div class="panel panel-default">
+			  <div class="panel-body post-content">
+			    #{postController.post.content}
+			  </div>
+			</div>
+		</h:panelGroup>
+		
+		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete post">
+			<h:form>
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h4 class="modal-title" id="myModalLabel">Delete - #{postController.post.title}</h4>
+			      </div>
+			      <div class="modal-body">
+			        Are you sure that you want to delete this post?
+			      </div>
+			      <div class="modal-footer">
+			      	<h:commandLink value="Yes" styleClass="btn btn-danger" action="#{postController.delete()}" />
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			      </div>
+			    </div>
+			  </div>
+		  	</h:form>
+		</div>
+				
+	</ui:define>
+
+</ui:composition>

@@ -1,13 +1,18 @@
 package org.uni.ruse.mse.models;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  * @author sinan
@@ -22,7 +27,11 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "createdBy")
+    private List<Post> posts;
 
     private String username;
     private String password;
@@ -58,6 +67,14 @@ public class User implements Serializable {
 
     public void setFullName(String fullName) {
 	this.fullName = fullName;
+    }
+
+    public List<Post> getPosts() {
+	return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+	this.posts = posts;
     }
 
 }

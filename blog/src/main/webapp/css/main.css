@@ -1,0 +1,25 @@
+pre {
+	margin: 0;
+	padding: 0;
+}
+
+.post-meta {
+	margin-bottom: 20px;
+	font-style: italic;
+	color: #888;
+}
+
+.post-content {
+	white-space: pre-line;
+}
+
+.posts-list-content {
+	width: 100%; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+a.link-btn {
+	margin-right: 5px;
+}

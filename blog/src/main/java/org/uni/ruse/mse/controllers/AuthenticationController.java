@@ -33,7 +33,7 @@ public class AuthenticationController implements Serializable {
 	if (user.isPresent()) {
 	    User authenticated = user.get();
 	    SessionUtils.getSession().setAttribute(SessionUtils.AUTHENTICATED_KEY, authenticated);
-	    return "/home?faces-redirect=true";
+	    return "/posts?faces-redirect=true";
 	}
 
 	FacesContext context = FacesContext.getCurrentInstance();

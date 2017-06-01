@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="head">
+		<title>Create new post</title>
+	</ui:define>
+
+	<ui:define name="content">
+		
+		<h:form id="post-form">
+			<div class="form-group">
+				<label for="title">Title:</label>
+				<h:inputText id="title" value="#{postCreateController.post.title}" styleClass="form-control" required="true"
+					autocomplete="off" validator="#{postCreateController.validateTitle}" />
+				<h:message for="title" styleClass="text-danger" />
+			</div>
+
+			<div class="form-group">
+				<label for="content">Content:</label>
+				<h:inputTextarea id="content" value="#{postCreateController.post.content}" styleClass="form-control" required="true"
+					autocomplete="off" rows="8" />
+				<h:message for="content" styleClass="text-danger" />
+			</div>
+			
+			<h:commandButton id="submit-btn" styleClass="btn btn-primary" value="Create" action="#{postCreateController.create()}" />
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>

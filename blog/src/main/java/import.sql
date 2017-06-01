@@ -1,10 +1,10 @@
 insert into User (username, password, fullName) values ('adrian', '123456', 'Adrian Mitev');
+insert into User (username, password, fullName) values ('sinan', '123456', 'Sinan Mustafov');
 insert into User (username, password, fullName) values ('donald', '123456', 'Donald Trump');
 insert into User (username, password, fullName) values ('ivan', '123456', 'Ivan Ivanov');
 insert into User (username, password, fullName) values ('valyo', '123456', 'Valenvin Minkov');
 insert into User (username, password, fullName) values ('radoslav', '123456', 'Radoslav Radev');
 insert into User (username, password, fullName) values ('deyan', '123456', 'Deyan Alexandrov');
-insert into User (username, password, fullName) values ('sinan', '123456', 'Sinan Mustafov');
 insert into User (username, password, fullName) values ('petya', '123456', 'Petya Dunitsova');
 insert into User (username, password, fullName) values ('georgi', '123456', 'Georgi Petrov');
 insert into User (username, password, fullName) values ('yordan', '123456', 'Yordan Iliev');

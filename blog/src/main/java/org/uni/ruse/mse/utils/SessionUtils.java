@@ -28,7 +28,7 @@ public class SessionUtils {
 	return getSession().getAttribute(AUTHENTICATED_KEY) != null;
     }
 
-    public static User getUser() {
+    public static User getAuthenticatedUser() {
 	Object authenticated = getSession().getAttribute(AUTHENTICATED_KEY);
 	if (authenticated instanceof User) {
 	    return (User) authenticated;

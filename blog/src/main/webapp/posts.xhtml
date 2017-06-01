@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="head">
+		<title>Posts</title>
+		<f:metadata>
+			<f:viewAction action="#{postsListController.loadPosts()}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		
+		<h:panelGroup layout="block" styleClass="alert alert-info text-center" role="alert" rendered="#{empty postsListController.posts}">
+			No posts yet
+		</h:panelGroup>
+		
+		<ui:repeat var="post" value="#{postsListController.posts}" varStatus="status">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">
+			    	<h:link value="#{post.title}" outcome="post" >
+					    <f:param name="id" value="#{post.id}" />
+					</h:link>
+			    </h3>
+			  </div>
+			  <div class="panel-body">
+			  	<p class="posts-list-content">
+			    	#{post.content}
+			    </p>
+			  </div>
+			  <div class="panel-footer">
+				<span class="badge">
+					Created by: <span class="glyphicon glyphicon-user" aria-hidden="true"></span> #{post.createdBy.fullName}
+				</span> ·
+				<span class="badge">
+					Created on: <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+					<h:outputText value="#{post.createdOn}" >
+					    <f:convertDateTime pattern="MMM dd HH:mm:ss yyyy" />
+					</h:outputText>
+				</span> ·
+				<span class="badge">
+					Last modified on: <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+					<h:outputText value="#{post.lastModifiedOn}" >
+					    <f:convertDateTime pattern="MMM dd HH:mm:ss yyyy" />
+					</h:outputText>
+				</span> ·
+				<span class="badge">
+					Comments: <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 3
+				</span>
+			  </div>
+			</div>
+		</ui:repeat>
+		
+	</ui:define>
+
+</ui:composition>

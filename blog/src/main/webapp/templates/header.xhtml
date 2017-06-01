@@ -13,13 +13,17 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/blog/home.jsf">Blog</a>
+					<a class="navbar-brand" href="/blog/posts.jsf">Blog</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">Posts</a>
+							<a href="/blog/posts.jsf">Posts</a>
+						</li>
+						<li>
+							<h:button class="btn btn-primary navbar-btn" value="Create post" outcome="create-post"
+								rendered="#{not empty authenticated}" />
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">

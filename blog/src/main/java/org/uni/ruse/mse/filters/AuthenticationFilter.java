@@ -72,7 +72,7 @@ public class AuthenticationFilter implements Filter {
 
     private static void redirectToHome(HttpServletRequest request, HttpServletResponse response) {
 	try {
-	    response.sendRedirect(request.getContextPath() + "/home.jsf");
+	    response.sendRedirect(request.getContextPath() + "/posts.jsf");
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}

@@ -28,7 +28,7 @@ public class ProfileController implements Serializable {
     private boolean success = false;
 
     public void loadUser() {
-	User currentUser = SessionUtils.getUser();
+	User currentUser = SessionUtils.getAuthenticatedUser();
 	user = new User();
 	user.setId(currentUser.getId());
 	user.setUsername(currentUser.getUsername());
@@ -38,7 +38,7 @@ public class ProfileController implements Serializable {
     public void save() {
 	String fullName = user.getFullName().trim();
 	String password = user.getPassword().trim();
-	User currentUser = SessionUtils.getUser();
+	User currentUser = SessionUtils.getAuthenticatedUser();
 	FacesContext context = FacesContext.getCurrentInstance();
 
 	if (!fullName.equals(currentUser.getFullName())) {
