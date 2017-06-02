@@ -14,7 +14,7 @@ pre {
 }
 
 .posts-list-content {
-	width: 100%; 
+	width: 100%;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -22,4 +22,8 @@ pre {
 
 a.link-btn {
 	margin-right: 5px;
+}
+
+.thumbnail {
+	padding: 0px;
 }

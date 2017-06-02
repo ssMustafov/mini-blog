@@ -15,6 +15,8 @@ import org.uni.ruse.mse.models.Post;
 @Stateless
 public class PostService {
 
+    private static final int PAGE_SIZE = 5;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -31,6 +33,26 @@ public class PostService {
     public List<Post> getPosts() {
 	TypedQuery<Post> query = entityManager.createNamedQuery("getPosts", Post.class);
 	return query.getResultList();
+    }
+
+    public List<Post> getPosts(int page) {
+	TypedQuery<Post> query = entityManager.createNamedQuery("getPosts", Post.class);
+	query.setFirstResult((page - 1) * PAGE_SIZE);
+	query.setMaxResults(PAGE_SIZE);
+	return query.getResultList();
+    }
+
+    public int getPageCount() {
+	TypedQuery<Long> query = entityManager.createNamedQuery("count", Long.class);
+	long count = query.getSingleResult();
+
+	int pages = (int) count / PAGE_SIZE;
+
+	if (count % PAGE_SIZE > 0) {
+	    pages++;
+	}
+
+	return pages;
     }
 
     public boolean isTitleTaken(Long id, String title) {

@@ -7,6 +7,7 @@
 	<ui:define name="head">
 		<title>Posts</title>
 		<f:metadata>
+			<f:viewParam name="page" value="#{postsListController.page}" />
 			<f:viewAction action="#{postsListController.loadPosts()}" />
 		</f:metadata>
 	</ui:define>
@@ -48,11 +49,37 @@
 					</h:outputText>
 				</span> ·
 				<span class="badge">
-					Comments: <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 3
+					Comments: <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> #{post.comments.size()}
 				</span>
 			  </div>
 			</div>
 		</ui:repeat>
+		
+		<div class="text-center">
+			<ul class="pagination">
+				<li class="#{!postsListController.prevPageLinkEnabled ? 'disabled' : '' }">
+					<h:link value="«" outcome="posts"
+						disabled="#{!postsListController.prevPageLinkEnabled}">
+						<f:param name="page" value="#{postsListController.currentPage - 1}" />
+					</h:link>
+				</li>
+				
+				<ui:repeat value="#{postsListController.getPages()}" var="page">
+					<li class="#{page == postsListController.currentPage ? 'active' : '' }">
+						<h:link value="#{page}">
+							<f:param name="page" value="#{page}" />
+						</h:link>
+					</li>
+				</ui:repeat>
+				
+				<li class="#{!postsListController.nextPageLinkEnabled ? 'disabled' : '' }">
+					<h:link value="»" outcome="posts"
+						disabled="#{!postsListController.nextPageLinkEnabled}">
+						<f:param name="page" value="#{postsListController.currentPage + 1}" />
+					</h:link>
+				</li>
+			</ul>
+		</div>
 		
 	</ui:define>
 

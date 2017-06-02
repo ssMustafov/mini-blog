@@ -44,10 +44,12 @@ public class PostController implements Serializable {
     }
 
     public String save() {
-	User user = SessionUtils.getAuthenticatedUser();
 	Date currentDate = new Date();
-	post.setCreatedBy(user);
-	post.setCreatedOn(currentDate);
+	if (postService.getPost(Long.parseLong(id)) == null) {
+	    User user = SessionUtils.getAuthenticatedUser();
+	    post.setCreatedBy(user);
+	    post.setCreatedOn(currentDate);
+	}
 	post.setLastModifiedOn(currentDate);
 	Post createdPost = postService.save(post);
 

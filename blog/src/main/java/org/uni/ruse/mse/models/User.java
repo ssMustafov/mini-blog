@@ -3,7 +3,6 @@ package org.uni.ruse.mse.models;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,8 +29,11 @@ public class User implements Serializable {
     @Column(name = "user_id")
     private Long id;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "createdBy")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "createdBy")
     private List<Post> posts;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "commentedBy")
+    private List<Comment> comments;
 
     private String username;
     private String password;
@@ -75,6 +77,14 @@ public class User implements Serializable {
 
     public void setPosts(List<Post> posts) {
 	this.posts = posts;
+    }
+
+    public List<Comment> getComments() {
+	return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+	this.comments = comments;
     }
 
 }

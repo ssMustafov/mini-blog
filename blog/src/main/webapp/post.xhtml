@@ -61,11 +61,21 @@
 					</div>
 				</h:panelGroup>
 			</div>
+			
+			<hr/>
+			
 			<div class="panel panel-default">
 			  <div class="panel-body post-content">
 			    #{postController.post.content}
 			  </div>
 			</div>
+			
+			<hr/>
+
+			<ui:include src="/comments.xhtml">
+				<ui:param name="postId" value="#{postController.post.id}" />
+				<ui:param name="comments" value="#{postController.post.comments}" />
+			</ui:include>
 		</h:panelGroup>
 		
 		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete post">

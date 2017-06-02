@@ -2,7 +2,9 @@ package org.uni.ruse.mse.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,13 +26,15 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQueries({ @NamedQuery(name = "getPosts", query = "from Post order by lastModifiedOn desc"),
 	@NamedQuery(name = "getByTitle", query = "from Post where title = :title"),
-	@NamedQuery(name = "deleteById", query = "delete from Post where id = :id") })
+	@NamedQuery(name = "deleteById", query = "delete from Post where post_id = :id"),
+	@NamedQuery(name = "count", query = "select count(*) from Post") })
 public class Post implements Serializable {
 
     private static final long serialVersionUID = 1892253977775132195L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     private Long id;
 
     @Column(unique = true)
@@ -47,6 +52,9 @@ public class Post implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedOn;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comment> comments;
 
     public Long getId() {
 	return id;
@@ -94,6 +102,14 @@ public class Post implements Serializable {
 
     public void setLastModifiedOn(Date lastModifiedOn) {
 	this.lastModifiedOn = lastModifiedOn;
+    }
+
+    public List<Comment> getComments() {
+	return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+	this.comments = comments;
     }
 
 }
