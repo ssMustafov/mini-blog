@@ -34,8 +34,12 @@ public class PostController implements Serializable {
 
     public void loadPost() {
 	if (id != null && !id.trim().isEmpty()) {
-	    long postId = Long.parseLong(id);
-	    post = postService.getPost(postId);
+	    try {
+		long postId = Long.parseLong(id);
+		post = postService.getPost(postId);
+	    } catch (NumberFormatException e) {
+		e.printStackTrace();
+	    }
 	}
 
 	if (post == null) {
